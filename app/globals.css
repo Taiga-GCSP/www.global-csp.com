@@ -4,16 +4,24 @@
 
 /* サイト全体の背景と文字の設定 */
 body {
-  /* ① グラデーションと背景画像の設定 */
+  /* ① アップロードしていただいた画像の読み込み */
+  /* 画像の上部は文字を読みやすくするため少し暗く（0.3）、下部は画像が綺麗に見えるよう透明（0）にしています */
   background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 80%), 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 80%), 
     url('/unfocused-city.jpg');
   
+  /* スクロールしても背景画像を動かさない（固定） */
   background-attachment: fixed;
+  
+  /* 画像の中央を基準に配置 */
   background-position: center;
+  
+  /* 画像を繰り返さない */
   background-repeat: no-repeat;
+  
+  /* 画面いっぱいに画像を引き伸ばしてカバーする */
   background-size: cover;
 
-  /* 背景が暗いため、文字色を白に統一 */
+  /* 文字色を「白」に強制統一し、青い背景でもクッキリ見せます */
   color: #ffffff !important; 
 }
