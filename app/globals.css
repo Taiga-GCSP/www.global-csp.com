@@ -1,26 +1,21 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* app/globals.css の body 部分を以下に差し替え */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  /* ① グラデーションの設定を修正 */
+  /* to bottom: 上から下へ */
+  /* rgba(0, 0, 0, 0.5) 0%: 上部は黒（透明度0.5） */
+  /* rgba(0, 0, 0, 0.2) 80%: 下部（80%の位置）に向かって、より透明（0.2）に */
+  background-image: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 80%), 
+    url('/city-bg.jpg');
+  
+  /* その他の設定はそのまま */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* 文字色は白のまま */
+  color: #ffffff; 
   font-family: Arial, Helvetica, sans-serif;
 }
