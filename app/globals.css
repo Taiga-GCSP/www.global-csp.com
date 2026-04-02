@@ -1,21 +1,19 @@
-/* app/globals.css の body 部分を以下に差し替え */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* サイト全体の背景と文字の設定 */
 body {
-  /* ① グラデーションの設定を修正 */
-  /* to bottom: 上から下へ */
-  /* rgba(0, 0, 0, 0.5) 0%: 上部は黒（透明度0.5） */
-  /* rgba(0, 0, 0, 0.2) 80%: 下部（80%の位置）に向かって、より透明（0.2）に */
+  /* ① グラデーションと背景画像の設定 */
   background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 80%), 
-    url('/city-bg.jpg');
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 80%), 
+    url('/unfocused-city.jpg');
   
-  /* その他の設定はそのまま */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
-  /* 文字色は白のまま */
-  color: #ffffff; 
-  font-family: Arial, Helvetica, sans-serif;
+  /* 背景が暗いため、文字色を白に統一 */
+  color: #ffffff !important; 
 }
