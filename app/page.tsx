@@ -174,23 +174,24 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-16 lg:pt-20 overflow-hidden"
+      /* 🌟 ここにCSSで定義した .parallax-header を指定します */
+      className="parallax-header relative min-h-screen flex items-center justify-center pt-16 lg:pt-20 overflow-hidden"
     >
-      <AnimatedBackground />
+      {/* 💡 元々あった <AnimatedBackground /> は、背景画像を隠してしまうため削除しました */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="mb-6">
-          <CompanyName className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900" />
+          <CompanyName className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white" />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight text-balance">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight text-balance">
           ビジネスの
           <span style={{ color: "#DC2626" }}>成長</span>を
           <br className="sm:hidden" />
           加速させる
         </h1>
 
-        <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed text-pretty">
+        <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed text-pretty font-medium drop-shadow-lg">
           AI×DXコンサルティング、海外進出支援、営業代行を
           <br className="hidden sm:block" />
           ワンストップで提供いたします

@@ -1,27 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* サイト全体の背景と文字の設定 */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* サイト全体のデフォルト設定（バグ防止） */
 body {
-  /* ① アップロードしていただいた画像の読み込み */
-  /* 画像の上部は文字を読みやすくするため少し暗く（0.3）、下部は画像が綺麗に見えるよう透明（0）にしています */
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 80%), 
-    url('/unfocused-city.jpg');
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+/* 🌟 サイトの上部のみに画像を固定する特別なクラス */
+/* -------------------------------------------------- */
+.parallax-header {
+  position: relative;
+  width: 100%;
+  height: 65vh; /* 画面の高さの65%のサイズ（お好みで 50vh や 80vh に調整してください） */
   
-  /* スクロールしても背景画像を動かさない（固定） */
+  /* ① 画像の読み込みとフェードアウト用の黒い膜 */
+  background-image: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 80%, rgba(255, 255, 255, 1) 100%), 
+    url('/unfocused-city.jpg');
+    
+  /* ② 画像を固定し、文字だけスクロールさせる（これが超重要！） */
   background-attachment: fixed;
   
-  /* 画像の中央を基準に配置 */
+  background-size: cover;
   background-position: center;
-  
-  /* 画像を繰り返さない */
   background-repeat: no-repeat;
   
-  /* 画面いっぱいに画像を引き伸ばしてカバーする */
-  background-size: cover;
-
-  /* 文字色を「白」に強制統一し、青い背景でもクッキリ見せます */
-  color: #ffffff !important; 
+  /* 画像の上の文字を中央に配置する設定 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
