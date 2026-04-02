@@ -771,8 +771,69 @@ function ContactSection() {
             </div>
             {/* △△△ ここまで △△△ */}
 
-// Footer Component
-function Footer() {
+// 🌟 1. 規約表示用モーダル（このコードが抜けていたためエラーになっている可能性があります）
+function PrivacyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-2xl max-h-[80vh] rounded-2xl shadow-2xl flex flex-col">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+          <h3 className="text-xl font-bold text-gray-900">プライバシーポリシー</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div className="p-6 overflow-y-auto text-sm text-gray-600 space-y-4">
+          <p>Global Connect Strategy Partners（以下、「当事業」といいます。）は、本ウェブサイト上で提供するサービス（以下、「本サービス」といいます。）における、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。</p>
+          
+          <h4 className="font-bold text-gray-900 mt-4">第1条（個人情報）</h4>
+          <p>「個人情報」とは、個人情報保護法にいう「個人情報」を指すものとし、生存する個人に関する情報であって、当該情報に含まれる氏名、生年月日、住所、電話番号、連絡先その他の記述等により特定の個人を識別できる情報（個人識別情報）を指します。</p>
+
+          <h4 className="font-bold text-gray-900 mt-4">第2条（個人情報の収集方法）</h4>
+          <p>当事業は、ユーザーがお問い合わせをする際に、氏名、電話番号、メールアドレスなどの個人情報をお尋ねすることがあります。</p>
+
+          <h4 className="font-bold text-gray-900 mt-4">第3条（個人情報を収集・利用する目的）</h4>
+          <p>当事業が個人情報を収集・利用する目的は、以下のとおりです。</p>
+          <ul className="list-disc list-inside ml-2 space-y-1">
+            <li>当事業サービスの提供・運営のため</li>
+            <li>ユーザーからのお問い合わせに回答するため（本人確認を行うことを含む）</li>
+            <li>上記の利用目的に付随する目的</li>
+          </ul>
+
+          <h4 className="font-bold text-gray-900 mt-4">第4条（利用目的の変更）</h4>
+          <p>当事業は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更するものとします。</p>
+
+          <h4 className="font-bold text-gray-900 mt-4">第5条（個人情報の第三者提供）</h4>
+          <p>当事業は、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。</p>
+          <ul className="list-disc list-inside ml-2 space-y-1">
+            <li>法令に基づく場合</li>
+            <li>人の生命、身体または財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+          </ul>
+
+          <h4 className="font-bold text-gray-900 mt-4">第6条（お問い合わせ窓口）</h4>
+          <p>本ポリシーに関するお問い合わせは、以下のメールアドレスまでお願いいたします。</p>
+          <p>E-mail：taigafukuda@global-csp.com</p>
+        </div>
+
+        <div className="p-4 border-t border-gray-100 text-center">
+          <button
+            onClick={onClose}
+            className="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-gray-800 transition-colors"
+          >
+            閉じる
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 🌟 2. Footer Component（1つにまとめました）
+function Footer({ onOpenPrivacy }: { onOpenPrivacy: () => void }) {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -789,17 +850,27 @@ function Footer() {
             </span>
           </div>
 
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Global Connect Strategy Partners. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <button
+              onClick={onOpenPrivacy}
+              className="text-gray-400 text-sm hover:text-white transition-colors cursor-pointer"
+            >
+              プライバシーポリシー
+            </button>
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Global Connect Strategy Partners. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
 
-// Main Page Component
+// 🌟 3. Main Page Component
 export default function HomePage() {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -807,9 +878,12 @@ export default function HomePage() {
       <ServicesSection />
       <ProfileSection />
       <ResultsSection />
-      <PricingSection /> {/* 👈 ここに追加しました */}
+      <PricingSection />
       <ContactSection />
-      <Footer />
+      
+      <Footer onOpenPrivacy={() => setIsPrivacyOpen(true)} />
+      
+      <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
     </main>
   );
 }
